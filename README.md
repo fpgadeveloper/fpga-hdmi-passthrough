@@ -3,25 +3,27 @@
 ## Description
 
 This is an FPGA based HDMI input to HDMI output example design.
-It is derived from the AUBoard 
-[HDMI Pass-Through Bare Metal Reference Design – 2023.1](https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/).
-Here it has been updated to version 2024.1 and converted to a scripted form for improved reproducibility,
-source control and support for other platforms.
+It is derived from the AMD HDMI example design which is built into Vitis Unified IDE and the AUBoard 
+[HDMI Pass-Through Bare Metal Reference Design – 2023.1](https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/). Kudos to [Adam Taylor](https://www.hackster.io/adam-taylor/4k-at-60hz-not-a-problem-with-the-auboard-b232b6)
+for his excellent write-up on porting the AMD design to the AUBoard.
+
+Here it has been updated to version 2024.1 and converted to a scripted form to make it easier to reproduce,
+and allow the design to be easily modified and ported to other platforms.
 
 ## Requirements
 
 This project is designed for version 2024.1 of the Xilinx tools (Vivado/Vitis/PetaLinux). 
 If you are using an older version of the Xilinx tools, then refer to the 
-[release tags](https://github.com/fpgadeveloper/rpi-camera-fmc/tags "releases")
+[release tags](https://github.com/fpgadeveloper/fpga-hdmi-passthrough/tags "releases")
 to find the version of this repository that matches your version of the tools.
 
 In order to test this design on hardware, you will need the following:
 
 * Vivado 2024.1
 * Vitis 2024.1
-* Linux PC for build
 * 1x HDMI monitor
 * 1x HDMI video source
+* [AMD HDMI IP license](https://www.amd.com/en/products/adaptive-socs-and-fpgas/intellectual-property/hdmi.html) (eval license available)
 * One of the supported target boards listed below
 
 ## Target designs
