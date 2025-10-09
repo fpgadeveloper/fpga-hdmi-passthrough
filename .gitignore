@@ -1,0 +1,14 @@
+RemoteSystemsTempFiles/
+Vivado/.Xil/
+*.log
+*.jou
+Vitis/*_workspace/
+Vitis/.*/
+Vitis/.*
+Vitis/boot/
+docs/build/
+bootimages/
+# UPDATER START
+Vivado/auboard/
+PetaLinux/auboard/
+# UPDATER END

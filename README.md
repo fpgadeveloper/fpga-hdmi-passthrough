@@ -29,27 +29,11 @@ In order to test this design on hardware, you will need the following:
 <!-- updater start -->
 ### FPGA designs
 
-| Target board          | Target design   | FMC Slot | Cameras | VCU   | Vivado<br> Edition |
-|-----------------------|-----------------|----------|---------|-------|-------|
-| [AUBoard 15P]         | `auboard`       | HPC      | 1     | :x:                | Standard :free: |
-
-### Zynq UltraScale+ designs
-
-| Target board          | Target design   | FMC Slot | Cameras | VCU   | Vivado<br> Edition |
-|-----------------------|-----------------|----------|---------|-------|-------|
-| [ZCU104]              | `zcu104`        | LPC      | 4     | :white_check_mark: | Standard :free: |
-| [ZCU102]              | `zcu102_hpc0`   | HPC0     | 4     | :x:                | Standard :free: |
-| [ZCU102]              | `zcu102_hpc1`   | HPC1     | 2     | :x:                | Standard :free: |
-| [ZCU106]              | `zcu106_hpc0`   | HPC0     | 4     | :white_check_mark: | Standard :free: |
-| [PYNQ-ZU]             | `pynqzu`        | LPC      | 2     | :x:                | Standard :free: |
-| [UltraZed-EV Carrier] | `uzev`          | HPC      | 4     | :white_check_mark: | Standard :free: |
+| Target board          | Target design   | Vivado<br> Edition |
+|-----------------------|-----------------|--------------------|
+| [AUBoard 15P]         | `auboard`       | Standard :free: |
 
 [AUBoard 15P]: https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/
-[ZCU104]: https://www.xilinx.com/zcu104
-[ZCU102]: https://www.xilinx.com/zcu102
-[ZCU106]: https://www.xilinx.com/zcu106
-[PYNQ-ZU]: https://www.amd.com/en/corporate/university-program/aup-boards/pynq-zu.html
-[UltraZed-EV Carrier]: https://www.xilinx.com/products/boards-and-kits/1-1s78dxb.html
 <!-- updater end -->
 
 Notes:
