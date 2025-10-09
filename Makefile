@@ -47,7 +47,7 @@ VIT_BOOT_TARG = $(VIT_BOOT)/$(TARGET)
 # outputs
 BOOTIMAGE_DIR = $(ROOT_DIR)/bootimages
 TEMPBOOT_DIR = $(BOOTIMAGE_DIR)/$(BD_NAME)_$(TARGET)
-PETL_ZIP = $(BOOTIMAGE_DIR)/$(PRJ_NAME)_$(TARGET)_petalinux-2024-1.zip
+BARE_ZIP = $(BOOTIMAGE_DIR)/$(PRJ_NAME)_$(TARGET)_standalone-2024-1.zip
 BOOTIMAGE_LOCK = $(ROOT_DIR)/.$(TARGET).lock
 
 # These macros return values from the valid target lists defined above
@@ -112,7 +112,7 @@ bootimage: check_target
 		rm -f $(BOOTIMAGE_LOCK); \
 	fi
 
-bootimage_locked: $(PETL_ZIP)
+bootimage_locked: $(BARE_ZIP)
 
 ifeq ($(call get_template_name,$(TARGET)), microblaze)
 $(PETL_ZIP): $(PETL_BOOT_MCS) $(PETL_BOOT_PRM) $(PETL_IMAGE_ELF) $(PETL_SYSTEM_BIT)
@@ -177,13 +177,18 @@ PETL_BUILD_DEPS = $(PETL_BOOT_MCS) $(PETL_BOOT_PRM) $(PETL_IMAGE_ELF) $(PETL_SYS
 $(PETL_BUILD_DEPS):
 	$(MAKE) --no-print-directory -C $(PETL_ROOT) petalinux TARGET=$(TARGET) JOBS=$(JOBS)
 
+$(BARE_ZIP): $(VIT_BOOT_FILE)
+	@echo 'Gather standalone application output products for $(TARGET)'
+	mkdir -p $(BOOTIMAGE_DIR)
+	cd $(VIT_BOOT_TARG) && zip -r $(BARE_ZIP) .
+
 $(VIT_BOOT_FILE):
 	$(MAKE) --no-print-directory -C $(VIT_ROOT) workspace TARGET=$(TARGET) JOBS=$(JOBS)
 	@if [ ! -e $@ ]; then echo "Error: $@ was not created for $(TARGET)."; exit 1; fi
 
 .PHONY: clean
 clean: check_target
-	$(RM) $(PETL_ZIP)
+	$(RM) $(BARE_ZIP)
 
 .PHONY: clean_all
 clean_all: 
