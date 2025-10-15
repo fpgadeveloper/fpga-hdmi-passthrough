@@ -22,7 +22,7 @@ auboard_target := microblaze
 TARGET_LIST := $(sort $(patsubst %_target,%,$(filter %_target,$(.VARIABLES))))
 
 # Vitis paths
-VIT_SCRIPT_WS = tcl/build-vitis.tcl
+VIT_SCRIPT_WS = py/build-vitis.py
 VIT_TARGET_WS = $(ROOT_DIR)/$(TARGET)_workspace
 VIT_LOCK = $(ROOT_DIR)/.$(TARGET).lock
 VIT_BOOT = $(ROOT_DIR)/boot
@@ -98,7 +98,7 @@ workspace_locked: $(VIT_TARGET_WS) $(VIT_BOOT_FILE)
 
 $(VIT_TARGET_WS) $(VIT_BOOT_FILE): $(VIV_XSA)
 	@if [ -d $@ ]; then echo "Workspace for $(TARGET) already exists but is outdated. Use 'make clean TARGET=$(TARGET)' to remove it."; exit 1; fi
-	$(XSCT) $(VIT_SCRIPT_WS) $(TARGET)
+	vitis -source $(VIT_SCRIPT_WS) $(TARGET) $(BD_NAME)
 
 $(VIV_XSA):
 	$(MAKE) -C $(VIV_DIR) xsa TARGET=$(TARGET) JOBS=$(JOBS)
