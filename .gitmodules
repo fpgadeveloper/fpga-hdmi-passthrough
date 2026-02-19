@@ -1,6 +1,3 @@
-[submodule "bdf"]
-	path = submodules/bdf
-	url = git@github.com:Avnet/bdf.git
 [submodule "submodules/avnet-bdf"]
 	path = submodules/avnet-bdf
 	url = git@github.com:fpgadeveloper/avnet-bdf.git
