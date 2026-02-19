@@ -7,20 +7,20 @@ It is derived from the AMD HDMI example design which is built into Vitis Unified
 [HDMI Pass-Through Bare Metal Reference Design – 2023.1](https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/). Kudos to [Adam Taylor](https://www.hackster.io/adam-taylor/4k-at-60hz-not-a-problem-with-the-auboard-b232b6)
 for his excellent write-up on porting the AMD design to the AUBoard.
 
-Here it has been updated to version 2024.1 and converted to a scripted form to make it easier to reproduce,
+Here it has been updated to version 2025.2 and converted to a scripted form to make it easier to reproduce,
 and allow the design to be easily modified and ported to other platforms.
 
 ## Requirements
 
-This project is designed for version 2024.1 of the Xilinx tools (Vivado/Vitis/PetaLinux). 
+This project is designed for version 2025.2 of the Xilinx tools (Vivado/Vitis/PetaLinux). 
 If you are using an older version of the Xilinx tools, then refer to the 
 [release tags](https://github.com/fpgadeveloper/fpga-hdmi-passthrough/tags "releases")
 to find the version of this repository that matches your version of the tools.
 
 In order to test this design on hardware, you will need the following:
 
-* Vivado 2024.1
-* Vitis 2024.1
+* Vivado 2025.2
+* Vitis 2025.2
 * 1x HDMI monitor
 * 1x HDMI video source
 * [AMD HDMI IP license](https://www.amd.com/en/products/adaptive-socs-and-fpgas/intellectual-property/hdmi.html) (eval license available)
@@ -37,6 +37,18 @@ In order to test this design on hardware, you will need the following:
 
 [AUBoard 15P]: https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/
 <!-- updater end -->
+
+### AUBoard board files
+
+The board definition files for the AUBoard are not currently included in the AMD Xilinx Board Store.
+To enable Vivado to recognize this board, the required board files have been included in this
+repository as a Git submodule (`submodules/avnet-bdf`), which is a fork of
+[Avnet's BDF repository](https://github.com/Avnet/bdf). When cloning this repo, use the `--recursive`
+flag to ensure the board files are downloaded:
+
+```
+git clone --recursive <repo-url>
+```
 
 Notes:
 1. The Vivado Edition column indicates which designs are supported by the Vivado *Standard* Edition, the
@@ -57,7 +69,7 @@ git clone --recursive https://github.com/fpgadeveloper/fpga-hdmi-passthrough.git
 Source Vivado tool:
 
 ```
-source <path-to-vivado>/2024.1/settings64.sh
+source <path-to-vivado>/2025.2/settings64.sh
 ```
 
 Build all (Vivado project and Vitis workspace):
