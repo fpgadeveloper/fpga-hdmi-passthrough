@@ -69,7 +69,7 @@ git clone --recursive https://github.com/fpgadeveloper/fpga-hdmi-passthrough.git
 Source Vivado tool:
 
 ```
-source <path-to-vivado>/2025.2/settings64.sh
+source <path-to-xilinx-tools>/2025.2/Vivado/settings64.sh
 ```
 
 Build all (Vivado project and Vitis workspace):
