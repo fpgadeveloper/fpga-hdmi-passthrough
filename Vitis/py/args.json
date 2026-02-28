@@ -1,0 +1,9 @@
+{
+    "bd_name": "hdmi",
+    "app_name": "test_app",
+    "app_template": "None",
+    "src": {
+        "all": "common/src"
+    },
+    "combine_bit_elf": false
+}
