@@ -47,7 +47,7 @@ repository as a Git submodule (`submodules/avnet-bdf`), which is a fork of
 flag to ensure the board files are downloaded:
 
 ```
-git clone --recursive <repo-url>
+git clone --recursive https://github.com/fpgadeveloper/fpga-hdmi-passthrough.git
 ```
 
 Notes:
