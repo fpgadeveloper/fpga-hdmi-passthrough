@@ -4,7 +4,6 @@
 
 RM = rm -rf
 ROOT_DIR = $(shell pwd)
-BD_NAME = hdmi
 PRJ_NAME = fpga-hdmi-passthrough
 
 # defaults
@@ -14,6 +13,7 @@ JOBS ?= 8
 
 # valid targets (template name)
 # UPDATER START
+BD_NAME = hdmi
 auboard_target := microblaze
 # UPDATER END
 
