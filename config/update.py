@@ -87,19 +87,28 @@ def update_readme(file_path,data):
                 # Write the line if not inside the updater block
                 outfile.write(line)
 
-def get_root_targets(data):
+def get_root_targets(data, args):
     templates = {'fpga': 'microblaze', 'z7': 'zynq', 'zu': 'zynqMP', 'versal': 'versal'}
     targets = []
     targets.append('BD_NAME = {}'.format(data['bd_name']))
+    targets.append('PRJ_NAME = {}'.format(data.get('prj_name', data['bd_name'])))
+    combine = str(args.get('combine_bit_elf', True)).lower()
+    targets.append('COMBINE_BIT_ELF = {}'.format(combine))
     for design in data['designs']:
         template = templates[design['group']]
-        target = '{}_target := {}'.format(design['label'],template)
+        if design.get('petalinux') and design.get('baremetal'):
+            sw = 'both'
+        elif design.get('petalinux'):
+            sw = 'petalinux_only'
+        else:
+            sw = 'baremetal_only'
+        target = '{}_target := {} {}'.format(design['label'],template,sw)
         targets.append(target)
     return(targets)
 
 def get_vivado_targets(data):
     targets = []
-    targets.append('BD_NAME = {}'.format(data.get('vivado_bd_name', data['bd_name'])))
+    targets.append('BD_NAME = {}'.format(data['bd_name']))
     targets += ['{}_target := {} {}'.format(design['label'],design['url'],design['boardname']) for design in data['designs']]
     return(targets)
 
@@ -211,7 +220,7 @@ update_readme(file_path,data)
 
 # Update the root makefile
 root_makefile = '../Makefile'
-root_targets = get_root_targets(data)
+root_targets = get_root_targets(data, args)
 update_file(root_makefile,root_targets)
 
 # Update the Vivado makefile

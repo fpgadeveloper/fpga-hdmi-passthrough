@@ -1,5 +1,6 @@
 {
   "bd_name": "hdmi",
+  "prj_name": "fpga-hdmi-passthrough",
   "groups": [
     {
       "label": "fpga",
