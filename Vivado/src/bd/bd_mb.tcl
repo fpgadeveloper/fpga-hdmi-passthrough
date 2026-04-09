@@ -292,7 +292,7 @@ set_property -dict [list \
 
 
 # Create instance: vcc_const, and set properties
-set vcc_const [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant vcc_const ]
+set vcc_const [ create_bd_cell -type inline_hdl -vlnv xilinx.com:inline_hdl:ilconstant:1.0 vcc_const ]
 set_property CONFIG.CONST_VAL {1} $vcc_const
 
 
@@ -456,7 +456,7 @@ set_property -dict [list \
 
 
 # Create instance: xlconcat, and set properties
-set xlconcat [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat xlconcat ]
+set xlconcat [ create_bd_cell -type inline_hdl -vlnv xilinx.com:inline_hdl:ilconcat:1.0 xlconcat ]
 set_property CONFIG.NUM_PORTS {3} $xlconcat
 
 
