@@ -35,7 +35,7 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 
 # Possible targets
 # UPDATER START
-dict set target_dict auboard { avnet.com auboard_15p mb }
+dict set target_dict auboard { avnet-tria auboard_15p mb }
 # UPDATER END
 
 # Function to display the options and get user input

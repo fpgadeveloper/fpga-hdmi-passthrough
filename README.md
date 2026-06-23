@@ -31,14 +31,19 @@ In order to test this design on hardware, you will need the following:
 <!-- updater start -->
 ### FPGA designs
 
-| Target board          | Target design   | Vivado<br> Edition |
-|-----------------------|-----------------|--------------------|
-| [AUBoard 15P]         | `auboard`       | Standard :free: |
+| Target board          | Target design   | Vivado<br> Edition | IP<br>License |
+|-----------------------|-----------------|--------------------|-------|
+| [AUBoard 15P]         | `auboard`       | Standard :free: | Required |
 
 [AUBoard 15P]: https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/auboard-15p-fpga-development-kit/
 <!-- updater end -->
 
-### AUBoard board files
+Notes:
+1. The Vivado Edition column indicates which designs are supported by the Vivado *Standard* Edition, the
+   FREE edition which can be used without a license. Vivado *Enterprise* Edition requires
+   a license however a 30-day evaluation license is available from the AMD Xilinx Licensing site.
+
+## AUBoard board files
 
 The board definition files for the AUBoard are not currently included in the AMD Xilinx Board Store.
 To enable Vivado to recognize this board, the required board files have been included in this
@@ -50,34 +55,67 @@ flag to ensure the board files are downloaded:
 git clone --recursive https://github.com/fpgadeveloper/fpga-hdmi-passthrough.git
 ```
 
-Notes:
-1. The Vivado Edition column indicates which designs are supported by the Vivado *Standard* Edition, the
-   FREE edition which can be used without a license. Vivado *Enterprise* Edition requires
-   a license however a 30-day evaluation license is available from the AMD Xilinx Licensing site.
-
 ## Software
 
 This design is driven by a standalone software application.
 
 ## Build instructions
 
-This repo contains submodules. To clone this repo, run:
+Clone the repo and change into its directory:
 ```
 git clone --recursive https://github.com/fpgadeveloper/fpga-hdmi-passthrough.git
+cd fpga-hdmi-passthrough
 ```
 
-Source Vivado tool:
+### Cross-platform build runner
+
+All builds are driven by `build.py` at the repo root, on both Windows
+(git bash) and Linux. The `build.sh` / `build.bat` shim finds a suitable
+Python 3 automatically (including the one bundled with the AMD tools).
+Pick a target design label from the tables above (or run `./build.sh
+list`), then run the build command for the stage(s) you want — each
+command builds whatever it depends on automatically and skips anything
+already built. On Windows without git bash, run the same commands from
+Command Prompt or PowerShell using `build.bat` (e.g. `build.bat xsa
+--target <target>`).
+
+You don't need to source the AMD tools first — the build runner finds
+Vivado, Vitis and PetaLinux automatically in their standard install
+locations and sets up the environment each stage needs. If your tools
+are installed somewhere non-standard and the runner can't find them,
+source the tool settings yourself before running the build.
+
+#### Build the Vivado project (bitstream + XSA)
 
 ```
-source <path-to-xilinx-tools>/2025.2/Vivado/settings64.sh
+./build.sh xsa --target <target>
 ```
 
-Build all (Vivado project and Vitis workspace):
+#### Build the standalone application
+
+Builds the Vitis workspace and the baremetal boot file (`BOOT.BIN` or
+bit file, depending on the device family):
 
 ```
-cd fpga-hdmi-passthrough/Vitis
-make workspace TARGET=auboard
+./build.sh standalone --target <target>
 ```
+
+#### Build everything
+
+Builds all of the above that the target supports, then gathers the boot
+images into `bootimages/*.zip`:
+
+```
+./build.sh all --target <target>
+./build.sh all --target all          # every target in the repo
+```
+
+Also available: `status`, `clean`, `project` — see
+`./build.sh --help`. On Windows, the PetaLinux and Yocto stages require a
+Linux machine; the runner says so and prints the hand-off command. The
+legacy `make` interface still works on Linux (each Makefile now wraps
+`build.sh`) but is deprecated and will be removed at the next version
+update.
 
 ## Usage instructions
 
